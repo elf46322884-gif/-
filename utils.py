@@ -2,7 +2,7 @@
 #   (함수 이름과 매개변수는 바꾸지 마세요. 내용만 고치세요.)
 #   ※ 각 함수가 정확히 어떻게 동작해야 하는지는 '문제지(정상 동작 명세)'를 따르세요.
 
-GPA_TABLE = {"A": 4.0, "B": 4.0, "C": 3.0, "D": 2.0, "F": 0.0}
+GPA_TABLE = {"A": 4.5, "B": 4.0, "C": 3.0, "D": 2.0, "F": 0.0}
 
 
 def total_score(student):
@@ -12,8 +12,7 @@ def total_score(student):
 
 def average_score(student):
     """학생의 평균."""
-    return total_score(student) / len(student)
-
+    return total_score(student) / 3
 
 def to_grade(avg):
     """평균을 학점으로 변환."""
@@ -38,15 +37,15 @@ def subject_average(students, subject):
     """과목 평균."""
     total = 0
     for stu in students:
-        total += stu["국어"]
-    return total / len(students)
+        total += stu[subject]
+    return total / 3
 
 
 def subject_top(students, subject):
     """과목 최고점."""
     top = 0
     for stu in students:
-        if stu[subject] < top:
+        if stu[subject] > top:
             top = stu[subject]
     return top
 
@@ -62,7 +61,7 @@ def grade_distribution(students):
 
 def rank_list(students):
     """총점 기준 정렬."""
-    return sorted(students, key=lambda s: total_score(s))
+    return sorted(students, key=lambda s: total_score(s), reverse=True)
 
 
 def pass_rate(students, cutoff=60):
