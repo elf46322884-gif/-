@@ -7,7 +7,7 @@ from utils import (total_score, average_score, to_grade, grade_to_gpa,
 st.set_page_config(page_title="성적 분석 대시보드", layout="wide")
 
 # 상단 배너 이미지 (banner.png 파일을 함께 둘 것)
-st.image("banner.png", width="stretch")
+st.image("banner.png", use_container_width=True)
 st.title("우리 반 성적 분석 대시보드")
 
 SUBJECTS = ["국어", "영어", "수학"]
@@ -33,7 +33,7 @@ with tab1:
     kor = st.number_input("국어", 0, 100, 0)
     eng = st.number_input("영어", 0, 100, 0)
     mat = st.number_input("수학", 0, 100, 0)
-    if st.button("추가")
+    if st.button("추가"):
         students.append({"이름": name, "국어": kor, "영어": eng, "수학": mat})
         st.success(f"{name} 학생을 추가했습니다.")
 
@@ -71,7 +71,7 @@ with tab3:
         subject = SUBJECTS[i]
         with cols[i]:
             st.subheader(subject)
-            st.write("평균: " + subject_average(students, subject))
+            st.write(f"평균: { subject_average(students, subject):.2f}")
             st.write(f"최고: {subject_top(students, subject)}")
 
     chart_data = []
@@ -91,6 +91,6 @@ with tab4:
     st.table(rank_table)
 
     st.header("학점 분포")
-    dist = grade_distribution(studets)
+    dist = grade_distribution(students)
     dist_data = [{"학점": g, "인원": dist[g]} for g in ["A", "B", "C", "D", "F"]]
     st.bar_chart(dist_data, x="학점", y="인원", horizontal=True, height=400)
