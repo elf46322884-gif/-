@@ -71,3 +71,4 @@ def pass_rate(students, cutoff=60):
         if average_score(stu) >= cutoff:
             count += 1
     return count / len(students) * 100
+  
